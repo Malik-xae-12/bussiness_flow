@@ -74,6 +74,18 @@ export const WorkflowDiagram = () => {
               status="normal"
             />
             <ProcessNode
+              title="Projection Quantity"
+              description="Will be given by buyer"
+              icon={CheckCircle}
+              status="normal"
+            />
+            <ProcessNode
+              title="Planning"
+              description="Planning will start for projection Qty itself"
+              icon={CheckCircle}
+              status="normal"
+            />
+            <ProcessNode
               title="Sales Order"
               description="Bulk confirmed → OrderReg (ERP)"
               icon={CheckCircle}
