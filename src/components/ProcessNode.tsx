@@ -39,7 +39,7 @@ export const ProcessNode = ({
     <div className="relative flex items-center gap-4">
       <div
         className={cn(
-          "group relative flex min-w-[280px] flex-col gap-3 rounded-xl border-2 p-4 transition-all duration-300",
+          "group relative flex w-[280px] flex-col gap-3 rounded-xl border-2 p-4 transition-all duration-300",
           statusColors[status],
           className
         )}
