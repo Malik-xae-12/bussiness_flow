@@ -53,8 +53,8 @@ export const WorkflowDiagram = () => {
           {/* Buyer */}
           <DepartmentLane name="Buyer" icon={Users} color="text-accent">
             <ProcessNode
-              title="Style Requirements"
-              description="Shares techpack & projection"
+              title="Style Details"
+              description="Shares techpack & projection quantity (planning only)"
               icon={FileText}
               status="normal"
             />
@@ -64,20 +64,26 @@ export const WorkflowDiagram = () => {
           <DepartmentLane name="Merchandising - Ambattur" icon={ClipboardList} color="text-primary">
             <ProcessNode
               title="Style Code Creation"
-              description="Create style & costing"
+              description="Create style code in ERP"
               icon={FileText}
               status="normal"
             />
             <ProcessNode
-              title="Sample Approvals"
-              description="Review and approve samples"
-              icon={CheckCircle}
-              status="success"
+              title="Costing"
+              description="Perform costing analysis"
+              icon={DollarSign}
+              status="normal"
             />
             <ProcessNode
-              title="Sales Order (ERP)"
-              description="Create order in OrderReg"
-              icon={DollarSign}
+              title="Sample Approvals"
+              description="Get buyer approval"
+              icon={CheckCircle}
+              status="normal"
+            />
+            <ProcessNode
+              title="Sales Order"
+              description="Bulk confirmed → OrderReg (ERP)"
+              icon={CheckCircle}
               status="success"
             />
           </DepartmentLane>
@@ -115,24 +121,22 @@ export const WorkflowDiagram = () => {
           {/* Import Team */}
           <DepartmentLane name="Import Team - Ambattur" icon={Ship} color="text-primary">
             <ProcessNode
-              title="Create RMO + PI"
-              description="Purchase request"
+              title="Create RMO"
+              description="Raw Material Order"
               icon={FileText}
               status="normal"
             />
             <ProcessNode
-              title="Booking Number"
-              description="Shipment booking"
-              icon={Ship}
+              title="Create PI Request"
+              description="Based on fabric requirements"
+              icon={FileText}
               status="normal"
             />
             <ProcessNode
-              title="Delay Updates"
-              description="Email-only tracking"
-              icon={AlertCircle}
-              status="warning"
-              hasWarning
-              warningText="Email only ⚠️"
+              title="Send to Commercial"
+              description="RMO + PI request"
+              icon={FileText}
+              status="normal"
             />
           </DepartmentLane>
 
@@ -144,83 +148,119 @@ export const WorkflowDiagram = () => {
               icon={FileText}
               status="normal"
             />
-            <ProcessNode
-              title="LC Request"
-              description="Letter of Credit"
-              icon={DollarSign}
-              status="normal"
-            />
-            <ProcessNode
-              title="Create PO in ERP"
-              description="Purchase Order"
-              icon={FileText}
-              status="success"
-            />
-            <ProcessNode
-              title="Update Planned Dates"
-              description="ETD & ETA"
-              icon={Clock}
-              status="normal"
-            />
           </DepartmentLane>
 
           {/* Supplier */}
           <DepartmentLane name="Supplier" icon={Factory} color="text-accent">
             <ProcessNode
-              title="Receive Request"
-              description="RMO + PI from Commercial"
+              title="Send PI"
+              description="Proforma Invoice + Ex-Mill date + Planned ETD"
               icon={FileText}
-              status="normal"
-            />
-            <ProcessNode
-              title="Send PI Details"
-              description="Ex-Mill Date & ETD"
-              icon={Clock}
-              status="normal"
-            />
-            <ProcessNode
-              title="LC Processing"
-              description="Bank verification"
-              icon={DollarSign}
               status="normal"
             />
           </DepartmentLane>
 
-          {/* Commercial Bangladesh */}
-          <DepartmentLane name="Commercial - Bangladesh" icon={Building2} color="text-primary">
+          {/* Commercial Ambattur → Bangladesh Flow */}
+          <DepartmentLane name="Commercial - Ambattur → Bangladesh" icon={Building2} color="text-primary">
             <ProcessNode
-              title="Send LC to Bank"
-              description="Supplier bank"
+              title="LC Request"
+              description="Ambattur raises LC request"
               icon={DollarSign}
               status="normal"
             />
             <ProcessNode
-              title="LC Correction Loop"
-              description="Email-based if mismatch"
+              title="Forward to Bangladesh"
+              description="LC request forwarded"
+              icon={FileText}
+              status="normal"
+            />
+            <ProcessNode
+              title="Send to Supplier Bank"
+              description="Bangladesh sends LC"
+              icon={DollarSign}
+              status="normal"
+            />
+            <ProcessNode
+              title="LC Mismatch Loop"
+              description="Email corrections if needed"
               icon={AlertCircle}
               status="warning"
               hasWarning
-              warningText="Manual correction"
+              warningText="Email-based corrections ⚠️"
             />
             <ProcessNode
               title="LC Approved"
-              description="Final approval"
+              description="Final approval received"
               icon={CheckCircle}
               status="success"
+            />
+          </DepartmentLane>
+
+          {/* Commercial Ambattur - Post LC */}
+          <DepartmentLane name="Commercial - Ambattur" icon={Building2} color="text-primary">
+            <ProcessNode
+              title="Create PO in ERP"
+              description="Purchase Order after LC approval"
+              icon={FileText}
+              status="success"
+            />
+            <ProcessNode
+              title="Update Planned Dates"
+              description="ETD & ETA in ERP"
+              icon={Clock}
+              status="normal"
+            />
+          </DepartmentLane>
+
+          {/* Logistics / Import Team */}
+          <DepartmentLane name="Logistics / Import Team - Ambattur" icon={Truck} color="text-primary">
+            <ProcessNode
+              title="Booking Number"
+              description="Created after goods readiness"
+              icon={Ship}
+              status="normal"
+            />
+            <ProcessNode
+              title="Shipment Departure"
+              description="As per ETD"
+              icon={Ship}
+              status="normal"
+            />
+            <ProcessNode
+              title="Delay Information"
+              description="Shared via email only"
+              icon={AlertCircle}
+              status="warning"
+              hasWarning
+              warningText="Email only - No visibility ⚠️"
+            />
+            <ProcessNode
+              title="Revised ETD/ETA"
+              description="Updated by Fabric team only"
+              icon={Clock}
+              status="warning"
+              hasWarning
+              warningText="Delay history not visible ⚠️"
             />
           </DepartmentLane>
 
           {/* Warehouse & QC */}
           <DepartmentLane name="Warehouse + QC" icon={PackageCheck} color="text-success">
             <ProcessNode
-              title="Material Receipt"
-              description="Update InHouse Date"
+              title="Fabric Receipt"
+              description="Receives at warehouse"
               icon={Truck}
               status="normal"
             />
             <ProcessNode
+              title="Update InHouse Date"
+              description="Date updated in ERP"
+              icon={Clock}
+              status="normal"
+            />
+            <ProcessNode
               title="Quality Inspection"
-              description="QC check"
+              description="QC team inspection"
               icon={CheckCircle}
               status="success"
             />
@@ -229,24 +269,24 @@ export const WorkflowDiagram = () => {
           {/* Fabric Allocation */}
           <DepartmentLane name="Fabric Allocation" icon={Layout} color="text-primary">
             <ProcessNode
-              title="Multi-Shipment"
-              description="Per style tracking"
+              title="Multiple Deliveries"
+              description="Same style, multiple shipments"
               icon={Package}
               status="normal"
             />
             <ProcessNode
-              title="Urgent Orders First"
-              description="Priority allocation"
+              title="Urgent Priority"
+              description="Urgent deliveries allocated first"
               icon={AlertCircle}
               status="warning"
             />
             <ProcessNode
-              title="Manual Balance"
-              description="Tracking issues"
+              title="Balance Tracking"
+              description="Manual due to system limits"
               icon={AlertCircle}
               status="warning"
               hasWarning
-              warningText="Manual tracking ⚠️"
+              warningText="Manual tracking - System limitation ⚠️"
             />
           </DepartmentLane>
 
@@ -254,7 +294,7 @@ export const WorkflowDiagram = () => {
           <DepartmentLane name="Production" icon={Factory} color="text-success">
             <ProcessNode
               title="Cutting"
-              description="Fabric cutting"
+              description="Based on fabric availability"
               icon={Layout}
               status="normal"
             />
@@ -266,13 +306,13 @@ export const WorkflowDiagram = () => {
             />
             <ProcessNode
               title="Finishing"
-              description="Final touches"
+              description="Final quality & finishing"
               icon={CheckCircle}
               status="normal"
             />
             <ProcessNode
               title="Dispatch"
-              description="Ship to buyer"
+              description="Shipped to buyer per PO schedule"
               icon={Truck}
               status="success"
             />
