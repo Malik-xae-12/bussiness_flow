@@ -22,7 +22,7 @@ export const DepartmentLane = ({
       <div className="flex gap-6">
         <div
           className={cn(
-            "sticky left-0 flex min-w-[200px] flex-col items-center justify-center gap-2 border-r border-border/50 bg-card/95 p-6 backdrop-blur",
+            "sticky left-0 w-[300px] flex flex-col items-center justify-center gap-2 border-r border-border/50 bg-card/95 p-6 backdrop-blur",
             color
           )}
         >

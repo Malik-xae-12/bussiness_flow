@@ -11,7 +11,6 @@ interface ProcessNodeProps {
   warningText?: string;
   className?: string;
 }
-
 export const ProcessNode = ({
   title,
   description,
@@ -41,7 +40,7 @@ export const ProcessNode = ({
         className={cn(
           "group relative flex w-[280px] flex-col gap-3 rounded-xl border-2 p-4 transition-all duration-300",
           statusColors[status],
-          className
+          className // Ensure className doesn't override width
         )}
       >
         <div className="flex items-start gap-3">
