@@ -9,7 +9,6 @@ interface DepartmentLaneProps {
   children: ReactNode;
   className?: string;
 }
-
 export const DepartmentLane = ({
   name,
   icon: Icon,
@@ -23,7 +22,8 @@ export const DepartmentLane = ({
         <div
           className={cn(
             "sticky left-0 w-[300px] flex flex-col items-center justify-center gap-2 border-r border-border/50 bg-card/95 p-6 backdrop-blur",
-            color
+            color,
+            "z-10" // Higher z-index for the left heading boxes
           )}
         >
           <div className="rounded-lg bg-background/80 p-3 shadow-sm">
@@ -32,7 +32,7 @@ export const DepartmentLane = ({
           <h2 className="text-center text-sm font-semibold">{name}</h2>
         </div>
         
-        <div className="flex flex-1 items-center gap-4 overflow-x-auto p-6">
+        <div className="flex flex-1 items-center gap-4 overflow-x-auto p-6 relative z-0">
           {children}
         </div>
       </div>
