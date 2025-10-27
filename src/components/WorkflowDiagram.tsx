@@ -18,7 +18,6 @@ import {
 import { WorkflowHeader } from "./WorkflowHeader";
 import { DepartmentLane } from "./DepartmentLane";
 import { ProcessNode } from "./ProcessNode";
-import { toast } from "sonner";
 
 export const WorkflowDiagram = () => {
   const [scale, setScale] = useState(1);
@@ -31,18 +30,12 @@ export const WorkflowDiagram = () => {
     setScale((prev) => Math.max(prev - 0.1, 0.7));
   };
 
-  const handleExport = () => {
-    toast.success("Export feature coming soon!", {
-      description: "PDF and image export will be available shortly.",
-    });
-  };
 
   return (
     <div className="min-h-screen bg-gradient-subtle">
       <WorkflowHeader
         onZoomIn={handleZoomIn}
         onZoomOut={handleZoomOut}
-        onExport={handleExport}
       />
 
       <div className="overflow-auto">
@@ -107,14 +100,6 @@ export const WorkflowDiagram = () => {
               description="Send to Import team"
               icon={Package}
               status="normal"
-            />
-            <ProcessNode
-              title="ETD/ETA Updates"
-              description="Manual revisions only"
-              icon={Clock}
-              status="warning"
-              hasWarning
-              warningText="Manual process"
             />
           </DepartmentLane>
 
@@ -206,7 +191,7 @@ export const WorkflowDiagram = () => {
             />
             <ProcessNode
               title="Update Planned Dates"
-              description="ETD & ETA in ERP"
+              description="ETD & ETA updated in ERP"
               icon={Clock}
               status="normal"
             />
