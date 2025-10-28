@@ -97,7 +97,7 @@ export const WorkflowDiagram = () => {
           <DepartmentLane name="Fabric Team - Ambattur" icon={Package} color="text-primary">
             <ProcessNode
               title="Create FIS"
-              description="Fabric Issue Sheet"
+              description="Fabric Information Sheet"
               icon={FileText}
               status="normal"
             />
