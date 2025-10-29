@@ -68,7 +68,7 @@ export const ProcessNode = ({
         )}
       </div>
 
-      <ArrowRight className="h-6 w-6 text-muted-foreground/50 group-last:hidden" />
+      {!hideArrow && <ArrowRight className="h-6 w-6 text-muted-foreground/50" />}
     </div>
   );
 };
