@@ -20,6 +20,7 @@ export const ProcessNode = ({
   hasWarning,
   warningText,
   className,
+  hideArrow,
 }: ProcessNodeProps) => {
   const statusColors = {
     normal: "border-border bg-card hover:shadow-md",
