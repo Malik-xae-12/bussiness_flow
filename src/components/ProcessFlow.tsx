@@ -15,11 +15,15 @@ const ProcessTaskCard = ({
   isLast,
   isSelected,
   onSelect,
+  teamId,
+  onNavigateToTeam,
 }: {
   task: ProcessTask;
   isLast: boolean;
   isSelected?: boolean;
   onSelect?: () => void;
+  teamId?: string;
+  onNavigateToTeam?: (teamId: string) => void;
 }) => {
   const Icon = task.icon;
 
