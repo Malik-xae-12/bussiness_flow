@@ -38,31 +38,7 @@ export const InteractiveWorkflow = () => {
 
   return (
     <div className="min-h-screen bg-gradient-subtle flex flex-col">
-      <WorkflowHeader />
-
-      {/* View Mode Controls */}
-      <div className="border-b border-border bg-card/50 px-4 py-3 flex items-center justify-end">
-        <div className="flex items-center gap-2">
-          <Button
-            variant={viewMode === "interactive" ? "default" : "outline"}
-            size="sm"
-            onClick={() => setViewMode("interactive")}
-            className="gap-2"
-          >
-            <List className="h-4 w-4" />
-            Interactive
-          </Button>
-          <Button
-            variant={viewMode === "grid" ? "default" : "outline"}
-            size="sm"
-            onClick={() => setViewMode("grid")}
-            className="gap-2"
-          >
-            <Grid3x3 className="h-4 w-4" />
-            Grid
-          </Button>
-        </div>
-      </div>
+      <WorkflowHeader viewMode={viewMode} onViewModeChange={setViewMode} />
 
       {/* Main Content */}
       {viewMode === "interactive" ? (
