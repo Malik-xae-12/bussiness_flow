@@ -94,7 +94,7 @@ export const workflowTeams: WorkflowTeam[] = [
       {
         id: "planning",
         title: "Planning",
-        description: "Planning will start for projection Qty itself",
+        description: "Navigate to planning workflow",
         icon: CheckCircle,
         status: "normal",
       },
@@ -117,7 +117,7 @@ export const workflowTeams: WorkflowTeam[] = [
     tasks: [
       {
         id: "projection-shared",
-        title: "Projection Shared by Merchant",
+        title: "Shared by Merchant",
         description: "Merchant provides style, quantity, and delivery breakdowns.",
         icon: ClipboardList,
         status: "normal",
@@ -125,7 +125,7 @@ export const workflowTeams: WorkflowTeam[] = [
       {
         id: "planner-reviews",
         title: "Planner Reviews Mail Details",
-        description: "Planner inputs received projection information into the planning tracker.",
+        description: "Planner inputs received information into the planning tracker.",
         icon: FileText,
         status: "normal",
       },
