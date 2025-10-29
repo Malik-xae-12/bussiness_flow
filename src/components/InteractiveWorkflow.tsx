@@ -4,7 +4,7 @@ import { WorkflowHeader } from "./WorkflowHeader";
 import { TeamSelector } from "./TeamSelector";
 import { ProcessFlow } from "./ProcessFlow";
 import { Button } from "@/components/ui/button";
-import { ZoomIn, ZoomOut, Grid3x3, List } from "lucide-react";
+import { Grid3x3, List } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type ViewMode = "interactive" | "grid";
@@ -16,17 +16,8 @@ export const InteractiveWorkflow = () => {
     new Set(["Phase 1: Style & Merchandising", "Phase 2: Procurement & Sourcing"])
   );
   const [viewMode, setViewMode] = useState<ViewMode>("interactive");
-  const [scale, setScale] = useState(1);
 
   const selectedTeam = workflowTeams.find((t) => t.id === selectedTeamId) || null;
-
-  const handleZoomIn = () => {
-    setScale((prev) => Math.min(prev + 0.1, 1.5));
-  };
-
-  const handleZoomOut = () => {
-    setScale((prev) => Math.max(prev - 0.1, 0.7));
-  };
 
   const togglePhase = (phase: string) => {
     const newExpanded = new Set(expandedPhases);
