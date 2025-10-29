@@ -44,7 +44,13 @@ const ProcessTaskCard = ({
   return (
     <div className="flex flex-col items-center">
       <button
-        onClick={onSelect}
+        onClick={() => {
+          if (task.id === "planning" && onNavigateToTeam) {
+            onNavigateToTeam("planning");
+          } else {
+            onSelect?.();
+          }
+        }}
         className={cn(
           "w-full max-w-sm p-4 rounded-xl border-2 transition-all duration-300 text-left group",
           statusColors[task.status],
