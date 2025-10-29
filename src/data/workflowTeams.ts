@@ -1,0 +1,400 @@
+import {
+  Users,
+  ClipboardList,
+  Package,
+  Ship,
+  Building2,
+  Truck,
+  PackageCheck,
+  Layout,
+  Factory,
+  FileText,
+  DollarSign,
+  CheckCircle,
+  Clock,
+  AlertCircle,
+  LucideIcon,
+} from "lucide-react";
+
+export interface ProcessTask {
+  id: string;
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  status: "normal" | "warning" | "success" | "critical";
+  hasWarning?: boolean;
+  warningText?: string;
+}
+
+export interface WorkflowTeam {
+  id: string;
+  name: string;
+  icon: LucideIcon;
+  color: string;
+  phase: string;
+  description: string;
+  tasks: ProcessTask[];
+}
+
+export const workflowTeams: WorkflowTeam[] = [
+  {
+    id: "buyer",
+    name: "Buyer",
+    icon: Users,
+    color: "from-accent/20 to-accent/5",
+    phase: "Phase 1: Style & Merchandising",
+    description: "Provides style details and requirements",
+    tasks: [
+      {
+        id: "style-details",
+        title: "Style Details",
+        description: "Shares techpack & projection quantity (planning only)",
+        icon: FileText,
+        status: "normal",
+      },
+    ],
+  },
+  {
+    id: "merchandising",
+    name: "Merchandising - Ambattur",
+    icon: ClipboardList,
+    color: "from-primary/20 to-primary/5",
+    phase: "Phase 1: Style & Merchandising",
+    description: "Style creation and costing",
+    tasks: [
+      {
+        id: "style-code",
+        title: "Style Code Creation",
+        description: "Create style code in ERP",
+        icon: FileText,
+        status: "normal",
+      },
+      {
+        id: "costing",
+        title: "Costing",
+        description: "Perform costing analysis",
+        icon: DollarSign,
+        status: "normal",
+      },
+      {
+        id: "sample-approvals",
+        title: "Sample Approvals",
+        description: "Get buyer approval",
+        icon: CheckCircle,
+        status: "normal",
+      },
+      {
+        id: "projection-qty",
+        title: "Projection Quantity",
+        description: "Will be given by buyer",
+        icon: CheckCircle,
+        status: "normal",
+      },
+      {
+        id: "planning",
+        title: "Planning",
+        description: "Planning will start for projection Qty itself",
+        icon: CheckCircle,
+        status: "normal",
+      },
+      {
+        id: "sales-order",
+        title: "Sales Order",
+        description: "Bulk confirmed → OrderReg (ERP)",
+        icon: CheckCircle,
+        status: "success",
+      },
+    ],
+  },
+  {
+    id: "fabric-team",
+    name: "Fabric Team - Ambattur",
+    icon: Package,
+    color: "from-blue/20 to-blue/5",
+    phase: "Phase 1: Style & Merchandising",
+    description: "Fabric information sheet creation",
+    tasks: [
+      {
+        id: "create-fis",
+        title: "Create FIS",
+        description: "Fabric Information Sheet",
+        icon: FileText,
+        status: "normal",
+      },
+      {
+        id: "update-mrcinf",
+        title: "Update MRCINF",
+        description: "Consumption & allowance",
+        icon: Layout,
+        status: "normal",
+      },
+      {
+        id: "material-req",
+        title: "Material Requirement",
+        description: "Send to Import team",
+        icon: Package,
+        status: "normal",
+      },
+    ],
+  },
+  {
+    id: "import-team",
+    name: "Import Team - Ambattur",
+    icon: Ship,
+    color: "from-cyan/20 to-cyan/5",
+    phase: "Phase 2: Procurement & Sourcing",
+    description: "Raw material procurement",
+    tasks: [
+      {
+        id: "create-rmo",
+        title: "Create RMO",
+        description: "Raw Material Order",
+        icon: FileText,
+        status: "normal",
+      },
+      {
+        id: "create-pi",
+        title: "Create PI Request",
+        description: "Based on fabric requirements",
+        icon: FileText,
+        status: "normal",
+      },
+      {
+        id: "send-commercial",
+        title: "Send to Commercial",
+        description: "RMO + PI request",
+        icon: FileText,
+        status: "normal",
+      },
+    ],
+  },
+  {
+    id: "commercial",
+    name: "Commercial - Ambattur",
+    icon: Building2,
+    color: "from-purple/20 to-purple/5",
+    phase: "Phase 2: Procurement & Sourcing",
+    description: "Purchase order and LC management",
+    tasks: [
+      {
+        id: "forward-supplier",
+        title: "Forward to Supplier",
+        description: "RMO + PI request",
+        icon: FileText,
+        status: "normal",
+      },
+      {
+        id: "lc-request",
+        title: "LC Request",
+        description: "Ambattur raises LC request",
+        icon: DollarSign,
+        status: "normal",
+      },
+      {
+        id: "forward-bangladesh",
+        title: "Forward to Bangladesh",
+        description: "LC request forwarded",
+        icon: FileText,
+        status: "normal",
+      },
+      {
+        id: "send-supplier-bank",
+        title: "Send to Supplier Bank",
+        description: "Bangladesh sends LC",
+        icon: DollarSign,
+        status: "normal",
+      },
+      {
+        id: "lc-mismatch",
+        title: "LC Mismatch Loop",
+        description: "Email corrections if needed",
+        icon: AlertCircle,
+        status: "warning",
+        hasWarning: true,
+        warningText: "Email-based corrections ⚠️",
+      },
+      {
+        id: "lc-approved",
+        title: "LC Approved",
+        description: "Final approval received",
+        icon: CheckCircle,
+        status: "success",
+      },
+      {
+        id: "create-po",
+        title: "Create PO in ERP",
+        description: "Purchase Order after LC approval",
+        icon: FileText,
+        status: "success",
+      },
+      {
+        id: "update-dates",
+        title: "Update Planned Dates",
+        description: "ETD & ETA updated in ERP",
+        icon: Clock,
+        status: "normal",
+      },
+    ],
+  },
+  {
+    id: "supplier",
+    name: "Supplier",
+    icon: Factory,
+    color: "from-orange/20 to-orange/5",
+    phase: "Phase 2: Procurement & Sourcing",
+    description: "Proforma invoice generation",
+    tasks: [
+      {
+        id: "send-pi",
+        title: "Send PI",
+        description: "Proforma Invoice + Ex-Mill date + Planned ETD",
+        icon: FileText,
+        status: "normal",
+      },
+    ],
+  },
+  {
+    id: "logistics",
+    name: "Logistics / Import Team - Ambattur",
+    icon: Truck,
+    color: "from-green/20 to-green/5",
+    phase: "Phase 3: Logistics & Shipping",
+    description: "Booking and shipment tracking",
+    tasks: [
+      {
+        id: "booking-number",
+        title: "Booking Number",
+        description: "Created after goods readiness",
+        icon: Ship,
+        status: "normal",
+      },
+      {
+        id: "shipment-departure",
+        title: "Shipment Departure",
+        description: "As per ETD",
+        icon: Ship,
+        status: "normal",
+      },
+      {
+        id: "delay-info",
+        title: "Delay Information",
+        description: "Shared via email only",
+        icon: AlertCircle,
+        status: "warning",
+        hasWarning: true,
+        warningText: "Email only - No visibility ⚠️",
+      },
+      {
+        id: "revised-eta",
+        title: "Revised ETD/ETA",
+        description: "Updated by Fabric team only",
+        icon: Clock,
+        status: "warning",
+        hasWarning: true,
+        warningText: "Delay history not visible ⚠️",
+      },
+    ],
+  },
+  {
+    id: "warehouse",
+    name: "Warehouse + QC",
+    icon: PackageCheck,
+    color: "from-emerald/20 to-emerald/5",
+    phase: "Phase 3: Logistics & Shipping",
+    description: "Quality control and receipt",
+    tasks: [
+      {
+        id: "fabric-receipt",
+        title: "Fabric Receipt",
+        description: "Receives at warehouse",
+        icon: Truck,
+        status: "normal",
+      },
+      {
+        id: "update-inhouse",
+        title: "Update InHouse Date",
+        description: "Date updated in ERP",
+        icon: Clock,
+        status: "normal",
+      },
+      {
+        id: "quality-inspection",
+        title: "Quality Inspection",
+        description: "QC team inspection",
+        icon: CheckCircle,
+        status: "success",
+      },
+    ],
+  },
+  {
+    id: "fabric-allocation",
+    name: "Fabric Allocation",
+    icon: Layout,
+    color: "from-indigo/20 to-indigo/5",
+    phase: "Phase 4: Production & Allocation",
+    description: "Allocate fabric across deliveries",
+    tasks: [
+      {
+        id: "multiple-deliveries",
+        title: "Multiple Deliveries",
+        description: "Same style, multiple shipments",
+        icon: Package,
+        status: "normal",
+      },
+      {
+        id: "urgent-priority",
+        title: "Urgent Priority",
+        description: "Urgent deliveries allocated first",
+        icon: AlertCircle,
+        status: "warning",
+      },
+      {
+        id: "balance-tracking",
+        title: "Balance Tracking",
+        description: "Manual due to system limits",
+        icon: AlertCircle,
+        status: "warning",
+        hasWarning: true,
+        warningText: "Manual tracking - System limitation ⚠️",
+      },
+    ],
+  },
+  {
+    id: "production",
+    name: "Production",
+    icon: Factory,
+    color: "from-rose/20 to-rose/5",
+    phase: "Phase 4: Production & Allocation",
+    description: "Cutting, stitching and dispatch",
+    tasks: [
+      {
+        id: "cutting",
+        title: "Cutting",
+        description: "Based on fabric availability",
+        icon: Layout,
+        status: "normal",
+      },
+      {
+        id: "stitching",
+        title: "Stitching",
+        description: "Garment assembly",
+        icon: Package,
+        status: "normal",
+      },
+      {
+        id: "finishing",
+        title: "Finishing",
+        description: "Final quality & finishing",
+        icon: CheckCircle,
+        status: "normal",
+      },
+      {
+        id: "dispatch",
+        title: "Dispatch",
+        description: "Shipped to buyer per PO schedule",
+        icon: Truck,
+        status: "success",
+      },
+    ],
+  },
+];
