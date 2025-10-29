@@ -32,7 +32,7 @@ export const DepartmentLane = ({
           <h2 className="text-center text-sm font-semibold">{name}</h2>
         </div>
         
-        <div className="flex flex-1 items-center gap-4 overflow-x-auto p-6 relative z-0">
+        <div className="flex flex-1 items-center gap-4 overflow-x-auto p-6 relative z-0 [&>div:last-child_svg]:hidden">
           {children}
         </div>
       </div>
