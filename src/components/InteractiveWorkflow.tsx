@@ -58,10 +58,19 @@ export const InteractiveWorkflow = () => {
             />
           </div>
 
-          {/* Planning Flow Section - Always visible below main workflow */}
-          <div className="border-t border-border/50">
-            <PlanningFlow />
-          </div>
+          {/* Planning Workflow Section - Shows when Planning task is selected */}
+          {selectedTaskId === "planning" && (
+            <div className="border-t border-border/50">
+              <PlanningWorkflow />
+            </div>
+          )}
+
+          {/* Planning Flow Section - Shows when no specific task is selected */}
+          {!selectedTaskId && (
+            <div className="border-t border-border/50">
+              <PlanningFlow />
+            </div>
+          )}
         </div>
       ) : (
         <div className="flex-1 overflow-auto p-6 flex items-center justify-center">
