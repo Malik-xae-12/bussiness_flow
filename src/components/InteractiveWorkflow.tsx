@@ -3,7 +3,6 @@ import { workflowTeams, WorkflowTeam } from "@/data/workflowTeams";
 import { WorkflowHeader } from "./WorkflowHeader";
 import { TeamSelector } from "./TeamSelector";
 import { ProcessFlow } from "./ProcessFlow";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 type ViewMode = "interactive" | "grid";
