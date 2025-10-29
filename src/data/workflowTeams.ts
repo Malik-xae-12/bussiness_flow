@@ -109,11 +109,11 @@ export const workflowTeams: WorkflowTeam[] = [
   },
   {
     id: "planning",
-    name: "Planning Workflow – From Projection to Re-Planning",
+    name: "Planning Workflow",
     icon: ClipboardList,
     color: "from-indigo/20 to-indigo/5",
     phase: "Phase 1: Style & Merchandising",
-    description: "Once the merchant shares the projection quantity and multiple delivery schedules, the planning team begins line allocation based on available capacity. The planner details the received mail, allocates quantities to respective groups, and creates the master production plan. If material delays occur, re-planning is triggered to adjust the start date according to actual material arrival.",
+    description: "Manage projection quantities, line allocation, and re-planning based on material availability.",
     tasks: [
       {
         id: "projection-shared",
