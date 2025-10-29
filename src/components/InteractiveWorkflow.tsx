@@ -82,23 +82,18 @@ export const InteractiveWorkflow = () => {
         </div>
       ) : (
         <div className="flex-1 overflow-auto p-6">
-          <div
-            className="origin-top-left transition-transform duration-300"
-            style={{ transform: `scale(${scale})` }}
-          >
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl">
-              {workflowTeams.map((team) => (
-                <GridTeamCard
-                  key={team.id}
-                  team={team}
-                  isSelected={selectedTeamId === team.id}
-                  onClick={() => {
-                    setSelectedTeamId(team.id);
-                    setViewMode("interactive");
-                  }}
-                />
-              ))}
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl">
+            {workflowTeams.map((team) => (
+              <GridTeamCard
+                key={team.id}
+                team={team}
+                isSelected={selectedTeamId === team.id}
+                onClick={() => {
+                  setSelectedTeamId(team.id);
+                  setViewMode("interactive");
+                }}
+              />
+            ))}
           </div>
         </div>
       )}
