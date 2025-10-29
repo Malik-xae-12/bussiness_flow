@@ -14,7 +14,11 @@ import {
   CheckCircle,
   Clock,
   AlertCircle,
+  ArrowRight,
+  Zap,
+  AlertTriangle,
 } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 import { WorkflowHeader } from "./WorkflowHeader";
 import { DepartmentLane } from "./DepartmentLane";
 import { ProcessNode } from "./ProcessNode";
@@ -30,6 +34,15 @@ export const WorkflowDiagram = () => {
     setScale((prev) => Math.max(prev - 0.1, 0.7));
   };
 
+  const WorkflowPhase = ({ title, description }: { title: string; description: string }) => (
+    <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg border border-primary/20 my-4 w-fit">
+      <Zap className="h-4 w-4 text-primary" />
+      <div>
+        <p className="text-xs font-semibold text-primary">{title}</p>
+        <p className="text-xs text-muted-foreground">{description}</p>
+      </div>
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-gradient-subtle">
@@ -38,11 +51,36 @@ export const WorkflowDiagram = () => {
         onZoomOut={handleZoomOut}
       />
 
+      <div className="border-b border-border/50 bg-card/50 px-6 py-4">
+        <div className="flex flex-wrap gap-4 items-center">
+          <div className="text-sm text-muted-foreground">Status Legend:</div>
+          <div className="flex flex-wrap gap-3">
+            <div className="flex items-center gap-2">
+              <div className="h-3 w-3 rounded-full bg-primary/30 border border-primary/50"></div>
+              <span className="text-xs">Normal</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="h-3 w-3 rounded-full bg-warning/30 border border-warning/50"></div>
+              <span className="text-xs">Warning/Manual</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="h-3 w-3 rounded-full bg-success/30 border border-success/50"></div>
+              <span className="text-xs">Confirmed/Success</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="overflow-auto">
         <div
           className="min-w-max origin-top-left transition-transform duration-300"
           style={{ transform: `scale(${scale})` }}
         >
+          {/* Phase 1: Style & Merchandising */}
+          <WorkflowPhase
+            title="Phase 1: Style & Merchandising"
+            description="Buyer requirements → Style finalization and costing"
+          />
           {/* Buyer */}
           <DepartmentLane name="Buyer" icon={Users} color="text-accent">
             <ProcessNode
