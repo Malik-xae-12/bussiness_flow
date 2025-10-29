@@ -30,13 +30,13 @@ export const TeamSelector = ({
   );
 
   return (
-    <div className="w-full md:w-80 h-full border-r border-border bg-gradient-to-b from-card/50 to-muted/20 overflow-y-auto flex flex-col">
-      <div className="p-6 border-b border-border sticky top-0 bg-card/95 backdrop-blur">
+    <div className="w-full md:w-80 h-full border-r border-border bg-gradient-to-b from-card/50 to-muted/20 flex flex-col">
+      <div className="p-6 border-b border-border bg-card/95 backdrop-blur">
         <h2 className="text-lg font-semibold">Teams</h2>
         <p className="text-xs text-muted-foreground mt-1">Select a team to view processes</p>
       </div>
 
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto hover:overflow-y-auto focus-within:overflow-y-auto">
         {Object.entries(groupedTeams).map(([phase, phaseTeams]) => (
           <div key={phase} className="p-4 border-b border-border/50">
             <button
