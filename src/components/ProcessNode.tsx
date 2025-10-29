@@ -35,7 +35,7 @@ export const ProcessNode = ({
   };
 
   return (
-    <div className="relative flex items-center gap-4">
+    <div className="relative flex items-center gap-4 group">
       <div
         className={cn(
           "group relative flex w-[280px] flex-col gap-3 rounded-xl border-2 p-4 transition-all duration-300",
@@ -57,7 +57,7 @@ export const ProcessNode = ({
             <CheckCircle2 className="h-5 w-5 text-success" />
           )}
         </div>
-        
+
         {hasWarning && warningText && (
           <Badge variant="outline" className="gap-1 border-warning/50 bg-warning/10 text-warning-foreground">
             <AlertTriangle className="h-3 w-3" />
@@ -65,8 +65,8 @@ export const ProcessNode = ({
           </Badge>
         )}
       </div>
-      
-      <ArrowRight className="h-6 w-6 text-muted-foreground/50" />
+
+      <ArrowRight className="h-6 w-6 text-muted-foreground/50 group-last:hidden" />
     </div>
   );
 };
