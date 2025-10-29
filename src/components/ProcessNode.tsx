@@ -10,6 +10,7 @@ interface ProcessNodeProps {
   hasWarning?: boolean;
   warningText?: string;
   className?: string;
+  hideArrow?: boolean;
 }
 export const ProcessNode = ({
   title,
