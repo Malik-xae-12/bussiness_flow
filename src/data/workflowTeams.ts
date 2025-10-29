@@ -13,6 +13,7 @@ import {
   CheckCircle,
   Clock,
   AlertCircle,
+  Zap,
   LucideIcon,
 } from "lucide-react";
 
