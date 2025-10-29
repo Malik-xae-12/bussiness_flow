@@ -42,18 +42,39 @@ export const InteractiveWorkflow = () => {
       {/* Main Content */}
       {viewMode === "interactive" ? (
         <div className="flex-1 flex overflow-hidden">
-          <TeamSelector
-            teams={workflowTeams}
-            selectedTeamId={selectedTeamId}
-            onSelectTeam={setSelectedTeamId}
-            expandedTeams={expandedPhases}
-            onToggleTeam={togglePhase}
-          />
-          <ProcessFlow
-            team={selectedTeam}
-            selectedTaskId={selectedTaskId}
-            onSelectTask={setSelectedTaskId}
-          />
+          {selectedTeamId === "planning-flow" ? (
+            <div className="flex-1 overflow-y-auto w-full">
+              <PlanningFlow />
+            </div>
+          ) : (
+            <>
+              <TeamSelector
+                teams={[
+                  ...workflowTeams,
+                  {
+                    id: "planning-flow",
+                    name: "Planning Process Flow",
+                    icon: workflowTeams[0]?.icon || (() => null),
+                    color: "from-purple/20 to-purple/5",
+                    phase: "Phase 2: Procurement & Sourcing",
+                    description: "Planning workflow from projection to re-planning",
+                    tasks: [],
+                  } as any,
+                ]}
+                selectedTeamId={selectedTeamId}
+                onSelectTeam={setSelectedTeamId}
+                expandedTeams={expandedPhases}
+                onToggleTeam={togglePhase}
+              />
+              {selectedTeam && (
+                <ProcessFlow
+                  team={selectedTeam}
+                  selectedTaskId={selectedTaskId}
+                  onSelectTask={setSelectedTaskId}
+                />
+              )}
+            </>
+          )}
         </div>
       ) : (
         <div className="flex-1 overflow-auto p-6 flex items-center justify-center">
