@@ -36,7 +36,12 @@ export const TeamSelector = ({
         <p className="text-xs text-muted-foreground mt-1">Select a team to view processes</p>
       </div>
 
-      <div className="flex-1 overflow-hidden hover:overflow-y-auto focus-within:overflow-y-auto">
+      <div
+        className="flex-1 overflow-y-auto"
+        style={{
+          overscrollBehavior: 'contain',
+        }}
+      >
         {Object.entries(groupedTeams).map(([phase, phaseTeams]) => (
           <div key={phase} className="p-4 border-b border-border/50">
             <button
