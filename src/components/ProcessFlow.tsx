@@ -1,3 +1,4 @@
+import { useRef, useEffect } from "react";
 import { WorkflowTeam, ProcessTask } from "@/data/workflowTeams";
 import { cn } from "@/lib/utils";
 import { AlertTriangle, CheckCircle2, ArrowDown } from "lucide-react";
