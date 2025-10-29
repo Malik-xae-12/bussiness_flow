@@ -106,6 +106,7 @@ export const ProcessFlow = ({
   team,
   selectedTaskId,
   onSelectTask,
+  onNavigateToTeam,
 }: ProcessFlowProps) => {
   if (!team) {
     return (
