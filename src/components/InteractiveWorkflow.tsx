@@ -4,6 +4,7 @@ import { WorkflowHeader } from "./WorkflowHeader";
 import { TeamSelector } from "./TeamSelector";
 import { ProcessFlow } from "./ProcessFlow";
 import { PlanningFlow } from "./PlanningFlow";
+import { PlanningWorkflow } from "./PlanningWorkflow";
 import { cn } from "@/lib/utils";
 
 type ViewMode = "interactive" | "grid";
