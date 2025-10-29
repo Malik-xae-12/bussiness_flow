@@ -113,6 +113,25 @@ export const TeamSelector = ({
           </div>
         ))}
       </div>
+
+      <style>{`
+        [data-team-selector] {
+          scroll-behavior: smooth;
+        }
+        [data-team-selector]::-webkit-scrollbar {
+          width: 6px;
+        }
+        [data-team-selector]::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        [data-team-selector]::-webkit-scrollbar-thumb {
+          background-color: rgba(0, 0, 0, 0.2);
+          border-radius: 3px;
+        }
+        [data-team-selector]::-webkit-scrollbar-thumb:hover {
+          background-color: rgba(0, 0, 0, 0.4);
+        }
+      `}</style>
     </div>
   );
 };
