@@ -41,46 +41,20 @@ export const InteractiveWorkflow = () => {
       {/* Main Content */}
       {viewMode === "interactive" ? (
         <div className="flex-1 flex overflow-hidden flex-col">
-          {selectedTaskId === "planning" ? (
-            // Planning Workflow View - Full width
-            <div className="flex-1 flex overflow-hidden">
-              <TeamSelector
-                teams={workflowTeams}
-                selectedTeamId={selectedTeamId}
-                onSelectTeam={setSelectedTeamId}
-                expandedTeams={expandedPhases}
-                onToggleTeam={togglePhase}
-              />
-              <div className="flex-1 overflow-y-auto">
-                <PlanningWorkflow />
-              </div>
-            </div>
-          ) : (
-            // Normal Process Flow View
-            <>
-              <div className="flex-1 flex overflow-hidden">
-                <TeamSelector
-                  teams={workflowTeams}
-                  selectedTeamId={selectedTeamId}
-                  onSelectTeam={setSelectedTeamId}
-                  expandedTeams={expandedPhases}
-                  onToggleTeam={togglePhase}
-                />
-                <ProcessFlow
-                  team={selectedTeam}
-                  selectedTaskId={selectedTaskId}
-                  onSelectTask={setSelectedTaskId}
-                />
-              </div>
-
-              {/* Planning Flow Section - Shows when no specific task is selected */}
-              {!selectedTaskId && (
-                <div className="border-t border-border/50">
-                  <PlanningFlow />
-                </div>
-              )}
-            </>
-          )}
+          <div className="flex-1 flex overflow-hidden">
+            <TeamSelector
+              teams={workflowTeams}
+              selectedTeamId={selectedTeamId}
+              onSelectTeam={setSelectedTeamId}
+              expandedTeams={expandedPhases}
+              onToggleTeam={togglePhase}
+            />
+            <ProcessFlow
+              team={selectedTeam}
+              selectedTaskId={selectedTaskId}
+              onSelectTask={setSelectedTaskId}
+            />
+          </div>
         </div>
       ) : (
         <div className="flex-1 overflow-auto p-6 flex items-center justify-center">
