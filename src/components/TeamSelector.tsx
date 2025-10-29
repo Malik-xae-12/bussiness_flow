@@ -38,6 +38,7 @@ export const TeamSelector = ({
 
       <div
         className="flex-1 overflow-y-auto"
+        data-team-selector
         style={{
           overscrollBehavior: 'contain',
         }}
