@@ -113,7 +113,7 @@ export const workflowTeams: WorkflowTeam[] = [
     icon: ClipboardList,
     color: "from-indigo/20 to-indigo/5",
     phase: "Phase 1: Style & Merchandising",
-    description: "Manage projection quantities, line allocation, and re-planning based on material availability.",
+    description: "Manage line allocation and re-planning based on material availability.",
     tasks: [
       {
         id: "projection-shared",
