@@ -53,6 +53,7 @@ export const InteractiveWorkflow = () => {
               team={selectedTeam}
               selectedTaskId={selectedTaskId}
               onSelectTask={setSelectedTaskId}
+              onNavigateToTeam={setSelectedTeamId}
             />
           </div>
         </div>
