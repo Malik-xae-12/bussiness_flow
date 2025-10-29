@@ -38,16 +38,10 @@ export const InteractiveWorkflow = () => {
 
   return (
     <div className="min-h-screen bg-gradient-subtle flex flex-col">
-      <WorkflowHeader
-        onZoomIn={handleZoomIn}
-        onZoomOut={handleZoomOut}
-      />
+      <WorkflowHeader />
 
       {/* View Mode Controls */}
-      <div className="border-b border-border bg-card/50 px-4 py-3 flex items-center justify-between">
-        <div className="text-sm text-muted-foreground">
-          <span className="font-semibold">View Mode:</span> Team-Based Navigation
-        </div>
+      <div className="border-b border-border bg-card/50 px-4 py-3 flex items-center justify-end">
         <div className="flex items-center gap-2">
           <Button
             variant={viewMode === "interactive" ? "default" : "outline"}
@@ -67,26 +61,12 @@ export const InteractiveWorkflow = () => {
             <Grid3x3 className="h-4 w-4" />
             Grid
           </Button>
-          <div className="ml-4 flex items-center gap-1 border-l border-border pl-4">
-            <Button variant="outline" size="icon" onClick={handleZoomOut}>
-              <ZoomOut className="h-4 w-4" />
-            </Button>
-            <span className="text-xs text-muted-foreground min-w-12 text-center">
-              {Math.round(scale * 100)}%
-            </span>
-            <Button variant="outline" size="icon" onClick={handleZoomIn}>
-              <ZoomIn className="h-4 w-4" />
-            </Button>
-          </div>
         </div>
       </div>
 
       {/* Main Content */}
       {viewMode === "interactive" ? (
-        <div
-          className="flex-1 flex overflow-hidden"
-          style={{ transform: `scale(${scale})`, transformOrigin: "top left" }}
-        >
+        <div className="flex-1 flex overflow-hidden">
           <TeamSelector
             teams={workflowTeams}
             selectedTeamId={selectedTeamId}
