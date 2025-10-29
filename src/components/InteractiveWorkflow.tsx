@@ -134,9 +134,6 @@ const GridTeamCard = ({
         <span className="text-xs font-medium text-primary">
           {team.tasks.length} task{team.tasks.length !== 1 ? "s" : ""}
         </span>
-        <span className="text-xs text-muted-foreground">
-          {team.tasks.filter((t) => t.status === "success").length} complete
-        </span>
       </div>
     </button>
   );
