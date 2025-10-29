@@ -153,6 +153,12 @@ export const WorkflowDiagram = () => {
             />
           </DepartmentLane>
 
+          {/* Phase 2: Procurement */}
+          <WorkflowPhase
+            title="Phase 2: Procurement & Sourcing"
+            description="Material procurement from suppliers via LC"
+          />
+
           {/* Import Team */}
           <DepartmentLane name="Import Team - Ambattur" icon={Ship} color="text-primary">
             <ProcessNode
@@ -247,6 +253,12 @@ export const WorkflowDiagram = () => {
             />
           </DepartmentLane>
 
+          {/* Phase 3: Logistics & Shipping */}
+          <WorkflowPhase
+            title="Phase 3: Logistics & Shipping"
+            description="Booking to arrival of materials at warehouse"
+          />
+
           {/* Logistics / Import Team */}
           <DepartmentLane name="Logistics / Import Team - Ambattur" icon={Truck} color="text-primary">
             <ProcessNode
@@ -301,6 +313,12 @@ export const WorkflowDiagram = () => {
             />
           </DepartmentLane>
 
+          {/* Phase 4: Production */}
+          <WorkflowPhase
+            title="Phase 4: Production & Allocation"
+            description="Fabric allocation and production execution"
+          />
+
           {/* Fabric Allocation */}
           <DepartmentLane name="Fabric Allocation" icon={Layout} color="text-primary">
             <ProcessNode
@@ -352,6 +370,17 @@ export const WorkflowDiagram = () => {
               status="success"
             />
           </DepartmentLane>
+
+          {/* Phase Complete */}
+          <div className="flex items-center gap-4 px-6 py-8">
+            <div className="flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-br from-success to-primary">
+              <CheckCircle className="h-6 w-6 text-white" />
+            </div>
+            <div>
+              <h3 className="font-semibold text-lg">Order Complete</h3>
+              <p className="text-sm text-muted-foreground">End-to-End Production Process Finished</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
