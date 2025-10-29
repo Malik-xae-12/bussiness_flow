@@ -109,6 +109,14 @@ export const ProcessFlow = ({
   onSelectTask,
   onNavigateToTeam,
 }: ProcessFlowProps) => {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = 0;
+    }
+  }, [selectedTaskId]);
+
   if (!team) {
     return (
       <div className="flex-1 flex flex-col items-center justify-center text-center p-8">
