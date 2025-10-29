@@ -182,6 +182,8 @@ export const ProcessFlow = ({
                   isLast={index === team.tasks.length - 1}
                   isSelected={selectedTaskId === task.id}
                   onSelect={() => onSelectTask?.(task.id)}
+                  teamId={team.id}
+                  onNavigateToTeam={onNavigateToTeam}
                 />
               ))
             ) : (
