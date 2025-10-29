@@ -147,7 +147,7 @@ export const ProcessFlow = ({
   }
 
   return (
-    <div className="flex-1 overflow-y-auto flex flex-col">
+    <div ref={scrollContainerRef} className="flex-1 overflow-y-auto flex flex-col">
       {/* Team Header */}
       <div
         className={cn(
