@@ -1,7 +1,7 @@
-import { WorkflowDiagram } from "@/components/WorkflowDiagram";
+import { InteractiveWorkflow } from "@/components/InteractiveWorkflow";
 
 const Index = () => {
-  return <WorkflowDiagram />;
+  return <InteractiveWorkflow />;
 };
 
 export default Index;
