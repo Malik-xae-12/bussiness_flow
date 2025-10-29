@@ -7,6 +7,7 @@ interface ProcessFlowProps {
   team: WorkflowTeam | null;
   selectedTaskId?: string;
   onSelectTask?: (taskId: string) => void;
+  onNavigateToTeam?: (teamId: string) => void;
 }
 
 const ProcessTaskCard = ({
