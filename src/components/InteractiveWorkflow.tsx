@@ -3,7 +3,9 @@ import { workflowTeams, WorkflowTeam } from "@/data/workflowTeams";
 import { WorkflowHeader } from "./WorkflowHeader";
 import { TeamSelector } from "./TeamSelector";
 import { ProcessFlow } from "./ProcessFlow";
+import { WorkflowDiagram } from "./WorkflowDiagram";
 import { cn } from "@/lib/utils";
+import { LayoutGrid, GitBranch } from "lucide-react";
 
 type ViewMode = "interactive" | "grid";
 
