@@ -44,7 +44,8 @@ export const workflowTeams: WorkflowTeam[] = [
     id: "buyer",
     name: "Buyer",
     icon: Users,
-    color: "from-accent/20 to-accent/5",
+    color: "from-rose/20 to-rose/5",
+    hexColor: "#FD7E82",
     phase: "Phase 1: Style & Merchandising",
     description: "Provides style details and requirements",
     tasks: [
