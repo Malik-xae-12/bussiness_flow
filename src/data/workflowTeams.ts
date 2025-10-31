@@ -298,6 +298,7 @@ export const workflowTeams: WorkflowTeam[] = [
     name: "Supplier",
     icon: Factory,
     color: "from-orange/20 to-orange/5",
+    hexColor: "#F8B88B",
     phase: "Phase 2: Procurement & Sourcing",
     description: "Proforma invoice generation",
     tasks: [
