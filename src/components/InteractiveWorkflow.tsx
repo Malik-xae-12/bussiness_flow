@@ -41,25 +41,63 @@ export const InteractiveWorkflow = () => {
     <div className="min-h-screen bg-gradient-subtle flex flex-col">
       <WorkflowHeader viewMode={viewMode} onViewModeChange={setViewMode} />
 
-      {/* Main Content */}
-      {viewMode === "interactive" ? (
-        <div className="flex-1 flex overflow-hidden flex-col">
-          <div className="flex-1 flex overflow-hidden">
-            <TeamSelector
-              teams={workflowTeams}
-              selectedTeamId={selectedTeamId}
-              onSelectTeam={setSelectedTeamId}
-              expandedTeams={expandedPhases}
-              onToggleTeam={togglePhase}
-            />
-            <ProcessFlow
-              team={selectedTeam}
-              selectedTaskId={selectedTaskId}
-              onSelectTask={setSelectedTaskId}
-              onNavigateToTeam={setSelectedTeamId}
-            />
+      {/* View Toggle Buttons */}
+      {viewMode === "interactive" && (
+        <div className="px-6 py-3 border-b border-border/50 flex items-center justify-between bg-card/50">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setDiagramView("interactive")}
+              className={cn(
+                "px-4 py-2 rounded-lg font-medium text-sm transition-all flex items-center gap-2",
+                diagramView === "interactive"
+                  ? "bg-primary text-primary-foreground shadow-lg"
+                  : "bg-muted text-muted-foreground hover:bg-muted/80"
+              )}
+            >
+              <LayoutGrid className="w-4 h-4" />
+              Interactive
+            </button>
+            <button
+              onClick={() => setDiagramView("diagram")}
+              className={cn(
+                "px-4 py-2 rounded-lg font-medium text-sm transition-all flex items-center gap-2",
+                diagramView === "diagram"
+                  ? "bg-primary text-primary-foreground shadow-lg"
+                  : "bg-muted text-muted-foreground hover:bg-muted/80"
+              )}
+            >
+              <GitBranch className="w-4 h-4" />
+              Workflow Diagram
+            </button>
           </div>
         </div>
+      )}
+
+      {/* Main Content */}
+      {viewMode === "interactive" ? (
+        diagramView === "diagram" ? (
+          <div className="flex-1 overflow-hidden">
+            <WorkflowDiagram />
+          </div>
+        ) : (
+          <div className="flex-1 flex overflow-hidden flex-col">
+            <div className="flex-1 flex overflow-hidden">
+              <TeamSelector
+                teams={workflowTeams}
+                selectedTeamId={selectedTeamId}
+                onSelectTeam={setSelectedTeamId}
+                expandedTeams={expandedPhases}
+                onToggleTeam={togglePhase}
+              />
+              <ProcessFlow
+                team={selectedTeam}
+                selectedTaskId={selectedTaskId}
+                onSelectTask={setSelectedTaskId}
+                onNavigateToTeam={setSelectedTeamId}
+              />
+            </div>
+          </div>
+        )
       ) : (
         <div className="flex-1 overflow-auto p-6 flex items-center justify-center">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl w-full">
