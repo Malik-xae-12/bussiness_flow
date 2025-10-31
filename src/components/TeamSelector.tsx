@@ -64,28 +64,25 @@ export const TeamSelector = ({
                   const Icon = team.icon;
                   const isSelected = selectedTeamId === team.id;
 
+                  const hexColor = team.hexColor || "#6B7280";
+
                   return (
                     <button
                       key={team.id}
                       onClick={() => onSelectTeam(team.id)}
-                      className={cn(
-                        "w-full p-3 rounded-lg border-2 transition-all duration-200 text-left group",
-                        "hover:shadow-md",
-                        isSelected
-                          ? "border-primary bg-gradient-to-br " +
-                            team.color +
-                            " shadow-lg shadow-primary/20"
-                          : "border-border/50 bg-card/50 hover:border-primary/30 hover:bg-primary/5"
-                      )}
+                      className="w-full p-3 rounded-lg border-2 transition-all duration-200 text-left group hover:shadow-md"
+                      style={{
+                        borderColor: isSelected ? hexColor : "rgba(229, 231, 235, 0.5)",
+                        backgroundColor: isSelected ? hexColor + "15" : "rgb(248, 250, 252)",
+                        boxShadow: isSelected ? `0 8px 16px ${hexColor}20` : "none",
+                      }}
                     >
                       <div className="flex items-start gap-3">
                         <div
-                          className={cn(
-                            "h-10 w-10 rounded-lg flex items-center justify-center transition-colors",
-                            isSelected
-                              ? "bg-primary/20 text-primary"
-                              : "bg-muted text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary"
-                          )}
+                          className="h-10 w-10 rounded-lg flex items-center justify-center transition-colors text-white"
+                          style={{
+                            backgroundColor: isSelected ? hexColor : "#d1d5db",
+                          }}
                         >
                           <Icon className="h-5 w-5" />
                         </div>
