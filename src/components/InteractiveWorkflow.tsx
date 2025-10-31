@@ -129,27 +129,24 @@ const GridTeamCard = ({
   onClick: () => void;
 }) => {
   const Icon = team.icon;
+  const hexColor = team.hexColor || "#6B7280";
 
   return (
     <button
       onClick={onClick}
-      className={cn(
-        "p-6 rounded-xl border-2 transition-all duration-300 text-left",
-        isSelected
-          ? "border-primary bg-gradient-to-br " +
-            team.color +
-            " shadow-lg shadow-primary/20"
-          : "border-border/50 bg-card hover:border-primary/30 hover:bg-primary/5 hover:shadow-md"
-      )}
+      className="p-6 rounded-xl border-2 transition-all duration-300 text-left"
+      style={{
+        borderColor: isSelected ? hexColor : "rgba(229, 231, 235, 0.5)",
+        backgroundColor: isSelected ? hexColor + "15" : "rgb(243, 244, 246)",
+        boxShadow: isSelected ? `0 10px 25px ${hexColor}20` : "none",
+      }}
     >
       <div className="flex items-start gap-3 mb-4">
         <div
-          className={cn(
-            "h-12 w-12 rounded-lg flex items-center justify-center",
-            isSelected
-              ? "bg-primary/20 text-primary"
-              : "bg-muted text-muted-foreground"
-          )}
+          className="h-12 w-12 rounded-lg flex items-center justify-center text-white"
+          style={{
+            backgroundColor: isSelected ? hexColor : "#d1d5db",
+          }}
         >
           <Icon className="h-6 w-6" />
         </div>
