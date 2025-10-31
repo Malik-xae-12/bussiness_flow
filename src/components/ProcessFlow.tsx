@@ -38,11 +38,17 @@ const ProcessTaskCard = ({
     critical: "border-destructive/30 bg-destructive/5 hover:shadow-lg shadow-destructive/10",
   };
 
-  const iconColors = {
-    normal: "text-primary",
-    warning: "text-warning",
-    success: "text-success",
-    critical: "text-destructive",
+  const getIconColor = () => {
+    switch (task.status) {
+      case "warning":
+        return "#F59E0B";
+      case "success":
+        return "#10B981";
+      case "critical":
+        return "#EF4444";
+      default:
+        return hexColor;
+    }
   };
 
   return (
