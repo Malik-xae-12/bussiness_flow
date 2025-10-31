@@ -16,6 +16,7 @@ export const InteractiveWorkflow = () => {
     new Set(["Phase 1: Style & Merchandising", "Phase 2: Procurement & Sourcing"])
   );
   const [viewMode, setViewMode] = useState<ViewMode>("interactive");
+  const [diagramView, setDiagramView] = useState<"interactive" | "diagram">("interactive");
 
   const selectedTeam = workflowTeams.find((t) => t.id === selectedTeamId) || null;
 
