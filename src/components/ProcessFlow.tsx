@@ -18,6 +18,7 @@ const ProcessTaskCard = ({
   onSelect,
   teamId,
   onNavigateToTeam,
+  teamHexColor,
 }: {
   task: ProcessTask;
   isLast: boolean;
@@ -25,7 +26,9 @@ const ProcessTaskCard = ({
   onSelect?: () => void;
   teamId?: string;
   onNavigateToTeam?: (teamId: string) => void;
+  teamHexColor?: string;
 }) => {
+  const hexColor = teamHexColor || "#6B7280";
   const Icon = task.icon;
 
   const statusColors = {
@@ -35,11 +38,17 @@ const ProcessTaskCard = ({
     critical: "border-destructive/30 bg-destructive/5 hover:shadow-lg shadow-destructive/10",
   };
 
-  const iconColors = {
-    normal: "text-primary",
-    warning: "text-warning",
-    success: "text-success",
-    critical: "text-destructive",
+  const getIconColor = () => {
+    switch (task.status) {
+      case "warning":
+        return "#F59E0B";
+      case "success":
+        return "#10B981";
+      case "critical":
+        return "#EF4444";
+      default:
+        return hexColor;
+    }
   };
 
   return (
@@ -56,15 +65,23 @@ const ProcessTaskCard = ({
           "w-full max-w-sm p-4 rounded-xl border-2 transition-all duration-300 text-left group",
           statusColors[task.status],
           isSelected &&
-            "ring-2 ring-primary ring-offset-2 shadow-lg scale-105"
+            "shadow-lg scale-105"
         )}
+        style={
+          isSelected ? {
+            borderColor: hexColor,
+            boxShadow: `0 0 0 2px white, 0 0 0 4px ${hexColor}`,
+          } : {
+            borderColor: task.status === "normal" ? `${hexColor}40` : undefined,
+          }
+        }
       >
         <div className="flex items-start gap-3">
           <div
-            className={cn(
-              "rounded-lg bg-background p-2 shadow-sm",
-              iconColors[task.status]
-            )}
+            className="rounded-lg bg-background p-2 shadow-sm"
+            style={{
+              color: getIconColor(),
+            }}
           >
             <Icon className="h-5 w-5" />
           </div>
@@ -150,16 +167,20 @@ export const ProcessFlow = ({
     <div ref={scrollContainerRef} className="flex-1 overflow-y-auto flex flex-col">
       {/* Team Header */}
       <div
-        className={cn(
-          "bg-gradient-to-r " +
-            team.color +
-            " border-b border-border sticky top-0 z-10"
-        )}
+        className="border-b border-border sticky top-0 z-10"
+        style={{
+          background: `linear-gradient(to right, ${team.hexColor || "#6B7280"}15, ${team.hexColor || "#6B7280"}08)`,
+        }}
       >
         <div className="p-6">
           <div className="flex items-start gap-4">
-            <div className="rounded-lg bg-background/80 p-3 shadow-sm">
-              <team.icon className="h-6 w-6 text-primary" />
+            <div
+              className="rounded-lg p-3 shadow-sm text-white"
+              style={{
+                backgroundColor: team.hexColor || "#6B7280",
+              }}
+            >
+              <team.icon className="h-6 w-6" />
             </div>
             <div className="flex-1">
               <h2 className="text-2xl font-bold text-foreground mb-1">
@@ -168,7 +189,12 @@ export const ProcessFlow = ({
               <p className="text-sm text-muted-foreground mb-2">
                 {team.description}
               </p>
-              <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">
+              <span
+                className="inline-block px-3 py-1 rounded-full text-xs font-semibold text-white"
+                style={{
+                  backgroundColor: (team.hexColor || "#6B7280") + "80",
+                }}
+              >
                 {team.phase}
               </span>
             </div>
@@ -194,6 +220,7 @@ export const ProcessFlow = ({
                   onSelect={() => onSelectTask?.(task.id)}
                   teamId={team.id}
                   onNavigateToTeam={onNavigateToTeam}
+                  teamHexColor={team.hexColor}
                 />
               ))
             ) : (

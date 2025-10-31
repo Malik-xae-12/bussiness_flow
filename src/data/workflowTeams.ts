@@ -34,6 +34,7 @@ export interface WorkflowTeam {
   name: string;
   icon: LucideIcon;
   color: string;
+  hexColor?: string;
   phase: string;
   description: string;
   tasks: ProcessTask[];
@@ -44,7 +45,8 @@ export const workflowTeams: WorkflowTeam[] = [
     id: "buyer",
     name: "Buyer",
     icon: Users,
-    color: "from-accent/20 to-accent/5",
+    color: "from-rose/20 to-rose/5",
+    hexColor: "#FD7E82",
     phase: "Phase 1: Style & Merchandising",
     description: "Provides style details and requirements",
     tasks: [
@@ -61,7 +63,8 @@ export const workflowTeams: WorkflowTeam[] = [
     id: "merchandising",
     name: "Merchandising - Ambattur",
     icon: ClipboardList,
-    color: "from-primary/20 to-primary/5",
+    color: "from-blue/20 to-blue/5",
+    hexColor: "#5DADE2",
     phase: "Phase 1: Style & Merchandising",
     description: "Style creation and costing",
     tasks: [
@@ -113,7 +116,8 @@ export const workflowTeams: WorkflowTeam[] = [
     id: "planning",
     name: "Planning Workflow",
     icon: ClipboardList,
-    color: "from-indigo/20 to-indigo/5",
+    color: "from-yellow/20 to-yellow/5",
+    hexColor: "#F4D03F",
     phase: "Phase 1: Style & Merchandising",
     description: "Manage line allocation and re-planning based on material availability.",
     tasks: [
@@ -160,7 +164,8 @@ export const workflowTeams: WorkflowTeam[] = [
     id: "fabric-team",
     name: "Fabric Team - Ambattur",
     icon: Package,
-    color: "from-blue/20 to-blue/5",
+    color: "from-violet/20 to-violet/5",
+    hexColor: "#AF7AC5",
     phase: "Phase 1: Style & Merchandising",
     description: "Fabric information sheet creation",
     tasks: [
@@ -191,7 +196,8 @@ export const workflowTeams: WorkflowTeam[] = [
     id: "import-team",
     name: "Import Team - Ambattur",
     icon: Ship,
-    color: "from-cyan/20 to-cyan/5",
+    color: "from-gray/20 to-gray/5",
+    hexColor: "#95A5A6",
     phase: "Phase 2: Procurement & Sourcing",
     description: "Raw material procurement",
     tasks: [
@@ -222,7 +228,8 @@ export const workflowTeams: WorkflowTeam[] = [
     id: "commercial",
     name: "Commercial - Ambattur",
     icon: Building2,
-    color: "from-purple/20 to-purple/5",
+    color: "from-pink/20 to-pink/5",
+    hexColor: "#E6A8D7",
     phase: "Phase 2: Procurement & Sourcing",
     description: "Purchase order and LC management",
     tasks: [
@@ -291,6 +298,7 @@ export const workflowTeams: WorkflowTeam[] = [
     name: "Supplier",
     icon: Factory,
     color: "from-orange/20 to-orange/5",
+    hexColor: "#F8B88B",
     phase: "Phase 2: Procurement & Sourcing",
     description: "Proforma invoice generation",
     tasks: [
@@ -307,7 +315,8 @@ export const workflowTeams: WorkflowTeam[] = [
     id: "logistics",
     name: "Logistics / Import Team - Ambattur",
     icon: Truck,
-    color: "from-green/20 to-green/5",
+    color: "from-teal/20 to-teal/5",
+    hexColor: "#48B0B0",
     phase: "Phase 3: Logistics & Shipping",
     description: "Booking and shipment tracking",
     tasks: [
@@ -350,6 +359,7 @@ export const workflowTeams: WorkflowTeam[] = [
     name: "Warehouse + QC",
     icon: PackageCheck,
     color: "from-emerald/20 to-emerald/5",
+    hexColor: "#52BE80",
     phase: "Phase 3: Logistics & Shipping",
     description: "Quality control and receipt",
     tasks: [
@@ -381,6 +391,7 @@ export const workflowTeams: WorkflowTeam[] = [
     name: "Fabric Allocation",
     icon: Layout,
     color: "from-indigo/20 to-indigo/5",
+    hexColor: "#6C63FF",
     phase: "Phase 4: Production & Allocation",
     description: "Allocate fabric across deliveries",
     tasks: [
@@ -413,7 +424,8 @@ export const workflowTeams: WorkflowTeam[] = [
     id: "production",
     name: "Production",
     icon: Factory,
-    color: "from-rose/20 to-rose/5",
+    color: "from-cyan/20 to-cyan/5",
+    hexColor: "#52C4B1",
     phase: "Phase 4: Production & Allocation",
     description: "Cutting, stitching and dispatch",
     tasks: [

@@ -64,44 +64,46 @@ export const TeamSelector = ({
                   const Icon = team.icon;
                   const isSelected = selectedTeamId === team.id;
 
+                  const hexColor = team.hexColor || "#6B7280";
+
                   return (
                     <button
                       key={team.id}
                       onClick={() => onSelectTeam(team.id)}
-                      className={cn(
-                        "w-full p-3 rounded-lg border-2 transition-all duration-200 text-left group",
-                        "hover:shadow-md",
-                        isSelected
-                          ? "border-primary bg-gradient-to-br " +
-                            team.color +
-                            " shadow-lg shadow-primary/20"
-                          : "border-border/50 bg-card/50 hover:border-primary/30 hover:bg-primary/5"
-                      )}
+                      className="w-full p-3 rounded-lg border-2 transition-all duration-200 text-left group hover:shadow-md"
+                      style={{
+                        borderColor: isSelected ? hexColor : "rgba(229, 231, 235, 0.5)",
+                        backgroundColor: isSelected ? hexColor + "15" : "rgb(248, 250, 252)",
+                        boxShadow: isSelected ? `0 8px 16px ${hexColor}20` : "none",
+                      }}
                     >
                       <div className="flex items-start gap-3">
                         <div
-                          className={cn(
-                            "h-10 w-10 rounded-lg flex items-center justify-center transition-colors",
-                            isSelected
-                              ? "bg-primary/20 text-primary"
-                              : "bg-muted text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary"
-                          )}
+                          className="h-10 w-10 rounded-lg flex items-center justify-center transition-colors text-white"
+                          style={{
+                            backgroundColor: isSelected ? hexColor : "#d1d5db",
+                          }}
                         >
                           <Icon className="h-5 w-5" />
                         </div>
                         <div className="flex-1 min-w-0">
                           <p
-                            className={cn(
-                              "font-semibold text-sm leading-tight",
-                              isSelected ? "text-primary" : "text-foreground"
-                            )}
+                            className="font-semibold text-sm leading-tight"
+                            style={{
+                              color: isSelected ? hexColor : "rgb(31, 41, 55)",
+                            }}
                           >
                             {team.name}
                           </p>
                           <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
                             {team.description}
                           </p>
-                          <span className="text-xs font-medium text-primary/70 mt-2 inline-block">
+                          <span
+                            className="text-xs font-medium mt-2 inline-block"
+                            style={{
+                              color: hexColor + "70",
+                            }}
+                          >
                             {team.tasks.length} task{team.tasks.length !== 1 ? "s" : ""}
                           </span>
                         </div>

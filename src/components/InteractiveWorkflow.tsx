@@ -3,7 +3,9 @@ import { workflowTeams, WorkflowTeam } from "@/data/workflowTeams";
 import { WorkflowHeader } from "./WorkflowHeader";
 import { TeamSelector } from "./TeamSelector";
 import { ProcessFlow } from "./ProcessFlow";
+import { WorkflowDiagram } from "./WorkflowDiagram";
 import { cn } from "@/lib/utils";
+import { LayoutGrid, GitBranch } from "lucide-react";
 
 type ViewMode = "interactive" | "grid";
 
@@ -14,6 +16,7 @@ export const InteractiveWorkflow = () => {
     new Set(["Phase 1: Style & Merchandising", "Phase 2: Procurement & Sourcing"])
   );
   const [viewMode, setViewMode] = useState<ViewMode>("interactive");
+  const [diagramView, setDiagramView] = useState<"interactive" | "diagram">("interactive");
 
   const selectedTeam = workflowTeams.find((t) => t.id === selectedTeamId) || null;
 
@@ -38,25 +41,63 @@ export const InteractiveWorkflow = () => {
     <div className="min-h-screen bg-gradient-subtle flex flex-col">
       <WorkflowHeader viewMode={viewMode} onViewModeChange={setViewMode} />
 
-      {/* Main Content */}
-      {viewMode === "interactive" ? (
-        <div className="flex-1 flex overflow-hidden flex-col">
-          <div className="flex-1 flex overflow-hidden">
-            <TeamSelector
-              teams={workflowTeams}
-              selectedTeamId={selectedTeamId}
-              onSelectTeam={setSelectedTeamId}
-              expandedTeams={expandedPhases}
-              onToggleTeam={togglePhase}
-            />
-            <ProcessFlow
-              team={selectedTeam}
-              selectedTaskId={selectedTaskId}
-              onSelectTask={setSelectedTaskId}
-              onNavigateToTeam={setSelectedTeamId}
-            />
+      {/* View Toggle Buttons */}
+      {viewMode === "interactive" && (
+        <div className="px-6 py-3 border-b border-border/50 flex items-center justify-between bg-card/50">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setDiagramView("interactive")}
+              className={cn(
+                "px-4 py-2 rounded-lg font-medium text-sm transition-all flex items-center gap-2",
+                diagramView === "interactive"
+                  ? "bg-primary text-primary-foreground shadow-lg"
+                  : "bg-muted text-muted-foreground hover:bg-muted/80"
+              )}
+            >
+              <LayoutGrid className="w-4 h-4" />
+              Interactive
+            </button>
+            <button
+              onClick={() => setDiagramView("diagram")}
+              className={cn(
+                "px-4 py-2 rounded-lg font-medium text-sm transition-all flex items-center gap-2",
+                diagramView === "diagram"
+                  ? "bg-primary text-primary-foreground shadow-lg"
+                  : "bg-muted text-muted-foreground hover:bg-muted/80"
+              )}
+            >
+              <GitBranch className="w-4 h-4" />
+              Workflow Diagram
+            </button>
           </div>
         </div>
+      )}
+
+      {/* Main Content */}
+      {viewMode === "interactive" ? (
+        diagramView === "diagram" ? (
+          <div className="flex-1 overflow-hidden">
+            <WorkflowDiagram />
+          </div>
+        ) : (
+          <div className="flex-1 flex overflow-hidden flex-col">
+            <div className="flex-1 flex overflow-hidden">
+              <TeamSelector
+                teams={workflowTeams}
+                selectedTeamId={selectedTeamId}
+                onSelectTeam={setSelectedTeamId}
+                expandedTeams={expandedPhases}
+                onToggleTeam={togglePhase}
+              />
+              <ProcessFlow
+                team={selectedTeam}
+                selectedTaskId={selectedTaskId}
+                onSelectTask={setSelectedTaskId}
+                onNavigateToTeam={setSelectedTeamId}
+              />
+            </div>
+          </div>
+        )
       ) : (
         <div className="flex-1 overflow-auto p-6 flex items-center justify-center">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl w-full">
@@ -88,27 +129,24 @@ const GridTeamCard = ({
   onClick: () => void;
 }) => {
   const Icon = team.icon;
+  const hexColor = team.hexColor || "#6B7280";
 
   return (
     <button
       onClick={onClick}
-      className={cn(
-        "p-6 rounded-xl border-2 transition-all duration-300 text-left",
-        isSelected
-          ? "border-primary bg-gradient-to-br " +
-            team.color +
-            " shadow-lg shadow-primary/20"
-          : "border-border/50 bg-card hover:border-primary/30 hover:bg-primary/5 hover:shadow-md"
-      )}
+      className="p-6 rounded-xl border-2 transition-all duration-300 text-left"
+      style={{
+        borderColor: isSelected ? hexColor : "rgba(229, 231, 235, 0.5)",
+        backgroundColor: isSelected ? hexColor + "15" : "rgb(243, 244, 246)",
+        boxShadow: isSelected ? `0 10px 25px ${hexColor}20` : "none",
+      }}
     >
       <div className="flex items-start gap-3 mb-4">
         <div
-          className={cn(
-            "h-12 w-12 rounded-lg flex items-center justify-center",
-            isSelected
-              ? "bg-primary/20 text-primary"
-              : "bg-muted text-muted-foreground"
-          )}
+          className="h-12 w-12 rounded-lg flex items-center justify-center text-white"
+          style={{
+            backgroundColor: isSelected ? hexColor : "#d1d5db",
+          }}
         >
           <Icon className="h-6 w-6" />
         </div>
