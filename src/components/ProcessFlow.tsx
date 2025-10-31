@@ -18,6 +18,7 @@ const ProcessTaskCard = ({
   onSelect,
   teamId,
   onNavigateToTeam,
+  teamHexColor,
 }: {
   task: ProcessTask;
   isLast: boolean;
@@ -25,7 +26,9 @@ const ProcessTaskCard = ({
   onSelect?: () => void;
   teamId?: string;
   onNavigateToTeam?: (teamId: string) => void;
+  teamHexColor?: string;
 }) => {
+  const hexColor = teamHexColor || "#6B7280";
   const Icon = task.icon;
 
   const statusColors = {
