@@ -228,7 +228,8 @@ export const workflowTeams: WorkflowTeam[] = [
     id: "commercial",
     name: "Commercial - Ambattur",
     icon: Building2,
-    color: "from-purple/20 to-purple/5",
+    color: "from-pink/20 to-pink/5",
+    hexColor: "#E6A8D7",
     phase: "Phase 2: Procurement & Sourcing",
     description: "Purchase order and LC management",
     tasks: [
