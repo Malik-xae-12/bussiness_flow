@@ -196,7 +196,8 @@ export const workflowTeams: WorkflowTeam[] = [
     id: "import-team",
     name: "Import Team - Ambattur",
     icon: Ship,
-    color: "from-cyan/20 to-cyan/5",
+    color: "from-gray/20 to-gray/5",
+    hexColor: "#95A5A6",
     phase: "Phase 2: Procurement & Sourcing",
     description: "Raw material procurement",
     tasks: [
