@@ -164,7 +164,8 @@ export const workflowTeams: WorkflowTeam[] = [
     id: "fabric-team",
     name: "Fabric Team - Ambattur",
     icon: Package,
-    color: "from-blue/20 to-blue/5",
+    color: "from-violet/20 to-violet/5",
+    hexColor: "#AF7AC5",
     phase: "Phase 1: Style & Merchandising",
     description: "Fabric information sheet creation",
     tasks: [
