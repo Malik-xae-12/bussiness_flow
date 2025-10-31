@@ -88,17 +88,22 @@ export const TeamSelector = ({
                         </div>
                         <div className="flex-1 min-w-0">
                           <p
-                            className={cn(
-                              "font-semibold text-sm leading-tight",
-                              isSelected ? "text-primary" : "text-foreground"
-                            )}
+                            className="font-semibold text-sm leading-tight"
+                            style={{
+                              color: isSelected ? hexColor : "rgb(31, 41, 55)",
+                            }}
                           >
                             {team.name}
                           </p>
                           <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
                             {team.description}
                           </p>
-                          <span className="text-xs font-medium text-primary/70 mt-2 inline-block">
+                          <span
+                            className="text-xs font-medium mt-2 inline-block"
+                            style={{
+                              color: hexColor + "70",
+                            }}
+                          >
                             {team.tasks.length} task{team.tasks.length !== 1 ? "s" : ""}
                           </span>
                         </div>
