@@ -34,6 +34,7 @@ export interface WorkflowTeam {
   name: string;
   icon: LucideIcon;
   color: string;
+  hexColor?: string;
   phase: string;
   description: string;
   tasks: ProcessTask[];
