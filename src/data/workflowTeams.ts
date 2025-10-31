@@ -63,7 +63,8 @@ export const workflowTeams: WorkflowTeam[] = [
     id: "merchandising",
     name: "Merchandising - Ambattur",
     icon: ClipboardList,
-    color: "from-primary/20 to-primary/5",
+    color: "from-blue/20 to-blue/5",
+    hexColor: "#5DADE2",
     phase: "Phase 1: Style & Merchandising",
     description: "Style creation and costing",
     tasks: [
