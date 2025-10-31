@@ -359,6 +359,7 @@ export const workflowTeams: WorkflowTeam[] = [
     name: "Warehouse + QC",
     icon: PackageCheck,
     color: "from-emerald/20 to-emerald/5",
+    hexColor: "#52BE80",
     phase: "Phase 3: Logistics & Shipping",
     description: "Quality control and receipt",
     tasks: [
