@@ -1,385 +1,150 @@
-import { useState } from "react";
-import {
-  Users,
-  ClipboardList,
-  Package,
-  Ship,
-  Building2,
-  Truck,
-  PackageCheck,
-  Layout,
-  Factory,
-  FileText,
-  DollarSign,
-  CheckCircle,
-  Clock,
-  AlertCircle,
-  ArrowRight,
-  Zap,
-  AlertTriangle,
-} from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { WorkflowHeader } from "./WorkflowHeader";
-import { DepartmentLane } from "./DepartmentLane";
-import { ProcessNode } from "./ProcessNode";
+import { workflowTeams } from "@/data/workflowTeams";
+import { cn } from "@/lib/utils";
 
 export const WorkflowDiagram = () => {
-  const [scale, setScale] = useState(1);
-
-  const handleZoomIn = () => {
-    setScale((prev) => Math.min(prev + 0.1, 1.5));
-  };
-
-  const handleZoomOut = () => {
-    setScale((prev) => Math.max(prev - 0.1, 0.7));
-  };
-
-  const WorkflowPhase = ({ title, description }: { title: string; description: string }) => (
-    <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg border border-primary/20 my-4 w-fit">
-      <Zap className="h-4 w-4 text-primary" />
-      <div>
-        <p className="text-xs font-semibold text-primary">{title}</p>
-        <p className="text-xs text-muted-foreground">{description}</p>
-      </div>
-    </div>
-  );
+  // Group teams by phase
+  const phases = ["Phase 1: Style & Merchandising", "Phase 2: Procurement & Sourcing", "Phase 3: Logistics & Shipping", "Phase 4: Production & Allocation"];
+  const teamsByPhase = phases.reduce((acc, phase) => {
+    acc[phase] = workflowTeams.filter(team => team.phase === phase);
+    return acc;
+  }, {} as Record<string, typeof workflowTeams>);
 
   return (
-    <div className="min-h-screen bg-gradient-subtle">
-      <WorkflowHeader
-        onZoomIn={handleZoomIn}
-        onZoomOut={handleZoomOut}
-      />
-
-      <div className="border-b border-border/50 bg-card/50 px-6 py-4">
-        <div className="flex flex-wrap gap-4 items-center">
-          <div className="text-sm text-muted-foreground">Status Legend:</div>
-          <div className="flex flex-wrap gap-3">
-            <div className="flex items-center gap-2">
-              <div className="h-3 w-3 rounded-full bg-primary/30 border border-primary/50"></div>
-              <span className="text-xs">Normal</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="h-3 w-3 rounded-full bg-warning/30 border border-warning/50"></div>
-              <span className="text-xs">Warning/Manual</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="h-3 w-3 rounded-full bg-success/30 border border-success/50"></div>
-              <span className="text-xs">Confirmed/Success</span>
-            </div>
-          </div>
+    <div className="w-full h-full overflow-auto bg-gradient-to-b from-background via-muted/10 to-background p-8">
+      <div className="max-w-full">
+        {/* Header */}
+        <div className="mb-12">
+          <h1 className="text-4xl font-bold text-foreground mb-2">Complete Workflow Diagram</h1>
+          <p className="text-muted-foreground">End-to-end production process visualization with all teams and flows</p>
         </div>
-      </div>
 
-      <div className="overflow-auto">
-        <div
-          className="min-w-max origin-top-left transition-transform duration-300"
-          style={{ transform: `scale(${scale})` }}
-        >
-          {/* Phase 1: Style & Merchandising */}
-          <WorkflowPhase
-            title="Phase 1: Style & Merchandising"
-            description="Buyer requirements → Style finalization and costing"
-          />
-          {/* Buyer */}
-          <DepartmentLane name="Buyer" icon={Users} color="text-accent">
-            <ProcessNode
-              title="Style Details"
-              description="Shares techpack & projection quantity (planning only)"
-              icon={FileText}
-              status="normal"
-            />
-          </DepartmentLane>
+        {/* Phase Sections */}
+        <div className="space-y-16">
+          {phases.map((phase, phaseIdx) => {
+            const teamsInPhase = teamsByPhase[phase];
+            if (teamsInPhase.length === 0) return null;
 
-          {/* Merchandising */}
-          <DepartmentLane name="Merchandising - Ambattur" icon={ClipboardList} color="text-primary">
-            <ProcessNode
-              title="Style Code Creation"
-              description="Create style code in ERP"
-              icon={FileText}
-              status="normal"
-            />
-            <ProcessNode
-              title="Costing"
-              description="Perform costing analysis"
-              icon={DollarSign}
-              status="normal"
-            />
-            <ProcessNode
-              title="Sample Approvals"
-              description="Get buyer approval"
-              icon={CheckCircle}
-              status="normal"
-            />
-            <ProcessNode
-              title="Projection Quantity"
-              description="Will be given by buyer"
-              icon={CheckCircle}
-              status="normal"
-            />
-            <ProcessNode
-              title="Planning"
-              description="Planning will start for projection Qty itself"
-              icon={CheckCircle}
-              status="normal"
-            />
-            <ProcessNode
-              title="Sales Order"
-              description="Bulk confirmed → OrderReg (ERP)"
-              icon={CheckCircle}
-              status="success"
-            />
-          </DepartmentLane>
+            return (
+              <div key={phase} className="space-y-6">
+                {/* Phase Header */}
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/20 border-2 border-primary">
+                    <span className="text-sm font-bold text-primary">{phaseIdx + 1}</span>
+                  </div>
+                  <h2 className="text-2xl font-bold text-foreground">{phase}</h2>
+                  <div className="flex-1 h-0.5 bg-gradient-to-r from-border to-transparent"></div>
+                </div>
 
-          {/* Fabric Team */}
-          <DepartmentLane name="Fabric Team - Ambattur" icon={Package} color="text-primary">
-            <ProcessNode
-              title="Create FIS"
-              description="Fabric Information Sheet"
-              icon={FileText}
-              status="normal"
-            />
-            <ProcessNode
-              title="Update MRCINF"
-              description="Consumption & allowance"
-              icon={Layout}
-              status="normal"
-            />
-            <ProcessNode
-              title="Material Requirement"
-              description="Send to Import team"
-              icon={Package}
-              status="normal"
-            />
-          </DepartmentLane>
+                {/* Teams Grid for this phase */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 ml-14">
+                  {teamsInPhase.map((team, idx) => {
+                    const hexColor = team.hexColor || "#6B7280";
+                    return (
+                      <div key={team.id} className="group">
+                        {/* Team Card */}
+                        <div
+                          className="p-6 rounded-xl border-2 transition-all duration-300 hover:shadow-lg cursor-pointer h-full"
+                          style={{
+                            borderColor: hexColor + "50",
+                            backgroundColor: hexColor + "08",
+                          }}
+                        >
+                          {/* Team Header */}
+                          <div className="flex items-start gap-4 mb-4">
+                            <div
+                              className="flex items-center justify-center w-12 h-12 rounded-lg flex-shrink-0 text-white"
+                              style={{ backgroundColor: hexColor }}
+                            >
+                              {team.icon && <team.icon className="w-6 h-6" />}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <h3 className="text-lg font-semibold text-foreground">{team.name}</h3>
+                              <p className="text-xs text-muted-foreground mt-1">{team.description}</p>
+                            </div>
+                          </div>
 
-          {/* Phase 2: Procurement */}
-          <WorkflowPhase
-            title="Phase 2: Procurement & Sourcing"
-            description="Material procurement from suppliers via LC"
-          />
+                          {/* Tasks List */}
+                          {team.tasks.length > 0 && (
+                            <div className="mt-4 pt-4 border-t border-border/50">
+                              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
+                                Tasks ({team.tasks.length})
+                              </p>
+                              <div className="space-y-2">
+                                {team.tasks.map((task, taskIdx) => (
+                                  <div
+                                    key={task.id}
+                                    className={cn(
+                                      "flex items-start gap-2 p-2 rounded-lg transition-colors",
+                                      task.status === "success"
+                                        ? "bg-success/10 text-success"
+                                        : task.status === "warning"
+                                          ? "bg-warning/10 text-warning"
+                                          : "bg-muted/50 text-muted-foreground hover:bg-muted"
+                                    )}
+                                  >
+                                    <span
+                                      className="flex items-center justify-center w-5 h-5 rounded-full text-xs font-bold flex-shrink-0 text-white"
+                                      style={{ backgroundColor: hexColor + "80" }}
+                                    >
+                                      {taskIdx + 1}
+                                    </span>
+                                    <div className="min-w-0 flex-1">
+                                      <p className="text-xs font-medium">{task.title}</p>
+                                      {task.description && (
+                                        <p className="text-xs mt-0.5 opacity-75">{task.description}</p>
+                                      )}
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
 
-          {/* Import Team */}
-          <DepartmentLane name="Import Team - Ambattur" icon={Ship} color="text-primary">
-            <ProcessNode
-              title="Create RMO"
-              description="Raw Material Order"
-              icon={FileText}
-              status="normal"
-            />
-            <ProcessNode
-              title="Create PI Request"
-              description="Based on fabric requirements"
-              icon={FileText}
-              status="normal"
-            />
-            <ProcessNode
-              title="Send to Commercial"
-              description="RMO + PI request"
-              icon={FileText}
-              status="normal"
-            />
-          </DepartmentLane>
+                          {/* Connector Arrow */}
+                          {idx < teamsInPhase.length - 1 && (
+                            <div className="mt-4 pt-4 border-t border-border/30 text-center">
+                              <div className="inline-block px-2 py-1 rounded-full bg-border text-muted-foreground text-xs">
+                                ↓
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
 
-          {/* Commercial Ambattur */}
-          <DepartmentLane name="Commercial - Ambattur" icon={Building2} color="text-primary">
-            <ProcessNode
-              title="Forward to Supplier"
-              description="RMO + PI request"
-              icon={FileText}
-              status="normal"
-            />
-          </DepartmentLane>
+                {/* Phase Separator */}
+                {phaseIdx < phases.length - 1 && (
+                  <div className="flex items-center justify-center py-8">
+                    <div className="flex-1 h-0.5 bg-gradient-to-r from-transparent via-border to-transparent"></div>
+                    <div className="px-4 py-2 rounded-full bg-muted border border-border text-xs font-semibold text-muted-foreground">
+                      ↓ Next Phase
+                    </div>
+                    <div className="flex-1 h-0.5 bg-gradient-to-r from-transparent via-border to-transparent"></div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
 
-          {/* Supplier */}
-          <DepartmentLane name="Supplier" icon={Factory} color="text-accent">
-            <ProcessNode
-              title="Send PI"
-              description="Proforma Invoice + Ex-Mill date + Planned ETD"
-              icon={FileText}
-              status="normal"
-            />
-          </DepartmentLane>
-
-          {/* Commercial Ambattur → Bangladesh Flow */}
-          <DepartmentLane name="Commercial - Ambattur → Bangladesh" icon={Building2} color="text-primary">
-            <ProcessNode
-              title="LC Request"
-              description="Ambattur raises LC request"
-              icon={DollarSign}
-              status="normal"
-            />
-            <ProcessNode
-              title="Forward to Bangladesh"
-              description="LC request forwarded"
-              icon={FileText}
-              status="normal"
-            />
-            <ProcessNode
-              title="Send to Supplier Bank"
-              description="Bangladesh sends LC"
-              icon={DollarSign}
-              status="normal"
-            />
-            <ProcessNode
-              title="LC Mismatch Loop"
-              description="Email corrections if needed"
-              icon={AlertCircle}
-              status="warning"
-              hasWarning
-              warningText="Email-based corrections ⚠️"
-            />
-            <ProcessNode
-              title="LC Approved"
-              description="Final approval received"
-              icon={CheckCircle}
-              status="success"
-            />
-          </DepartmentLane>
-
-          {/* Commercial Ambattur - Post LC */}
-          <DepartmentLane name="Commercial - Ambattur" icon={Building2} color="text-primary">
-            <ProcessNode
-              title="Create PO in ERP"
-              description="Purchase Order after LC approval"
-              icon={FileText}
-              status="success"
-            />
-            <ProcessNode
-              title="Update Planned Dates"
-              description="ETD & ETA updated in ERP"
-              icon={Clock}
-              status="normal"
-            />
-          </DepartmentLane>
-
-          {/* Phase 3: Logistics & Shipping */}
-          <WorkflowPhase
-            title="Phase 3: Logistics & Shipping"
-            description="Booking to arrival of materials at warehouse"
-          />
-
-          {/* Logistics / Import Team */}
-          <DepartmentLane name="Logistics / Import Team - Ambattur" icon={Truck} color="text-primary">
-            <ProcessNode
-              title="Booking Number"
-              description="Created after goods readiness"
-              icon={Ship}
-              status="normal"
-            />
-            <ProcessNode
-              title="Shipment Departure"
-              description="As per ETD"
-              icon={Ship}
-              status="normal"
-            />
-            <ProcessNode
-              title="Delay Information"
-              description="Shared via email only"
-              icon={AlertCircle}
-              status="warning"
-              hasWarning
-              warningText="Email only - No visibility ⚠️"
-            />
-            <ProcessNode
-              title="Revised ETD/ETA"
-              description="Updated by Fabric team only"
-              icon={Clock}
-              status="warning"
-              hasWarning
-              warningText="Delay history not visible ⚠️"
-            />
-          </DepartmentLane>
-
-          {/* Warehouse & QC */}
-          <DepartmentLane name="Warehouse + QC" icon={PackageCheck} color="text-success">
-            <ProcessNode
-              title="Fabric Receipt"
-              description="Receives at warehouse"
-              icon={Truck}
-              status="normal"
-            />
-            <ProcessNode
-              title="Update InHouse Date"
-              description="Date updated in ERP"
-              icon={Clock}
-              status="normal"
-            />
-            <ProcessNode
-              title="Quality Inspection"
-              description="QC team inspection"
-              icon={CheckCircle}
-              status="success"
-            />
-          </DepartmentLane>
-
-          {/* Phase 4: Production */}
-          <WorkflowPhase
-            title="Phase 4: Production & Allocation"
-            description="Fabric allocation and production execution"
-          />
-
-          {/* Fabric Allocation */}
-          <DepartmentLane name="Fabric Allocation" icon={Layout} color="text-primary">
-            <ProcessNode
-              title="Multiple Deliveries"
-              description="Same style, multiple shipments"
-              icon={Package}
-              status="normal"
-            />
-            <ProcessNode
-              title="Urgent Priority"
-              description="Urgent deliveries allocated first"
-              icon={AlertCircle}
-              status="warning"
-            />
-            <ProcessNode
-              title="Balance Tracking"
-              description="Manual due to system limits"
-              icon={AlertCircle}
-              status="warning"
-              hasWarning
-              warningText="Manual tracking - System limitation ⚠️"
-            />
-          </DepartmentLane>
-
-          {/* Production */}
-          <DepartmentLane name="Production" icon={Factory} color="text-success">
-            <ProcessNode
-              title="Cutting"
-              description="Based on fabric availability"
-              icon={Layout}
-              status="normal"
-            />
-            <ProcessNode
-              title="Stitching"
-              description="Garment assembly"
-              icon={Package}
-              status="normal"
-            />
-            <ProcessNode
-              title="Finishing"
-              description="Final quality & finishing"
-              icon={CheckCircle}
-              status="normal"
-            />
-            <ProcessNode
-              title="Dispatch"
-              description="Shipped to buyer per PO schedule"
-              icon={Truck}
-              status="success"
-            />
-          </DepartmentLane>
-
-          {/* Phase Complete */}
-          <div className="flex items-center gap-4 px-6 py-8">
-            <div className="flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-br from-success to-primary">
-              <CheckCircle className="h-6 w-6 text-white" />
-            </div>
-            <div>
-              <h3 className="font-semibold text-lg">Order Complete</h3>
-              <p className="text-sm text-muted-foreground">End-to-End Production Process Finished</p>
-            </div>
+        {/* Legend */}
+        <div className="mt-16 pt-8 border-t border-border/50">
+          <h3 className="text-lg font-semibold text-foreground mb-4">Team Colors</h3>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {workflowTeams.map((team) => {
+              const hexColor = team.hexColor || "#6B7280";
+              return (
+                <div key={team.id} className="flex items-center gap-3 p-3 rounded-lg bg-muted/30">
+                  <div
+                    className="w-4 h-4 rounded-full flex-shrink-0 border border-border/50"
+                    style={{ backgroundColor: hexColor }}
+                  ></div>
+                  <span className="text-xs font-medium text-foreground">{team.name}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
