@@ -116,7 +116,8 @@ export const workflowTeams: WorkflowTeam[] = [
     id: "planning",
     name: "Planning Workflow",
     icon: ClipboardList,
-    color: "from-indigo/20 to-indigo/5",
+    color: "from-yellow/20 to-yellow/5",
+    hexColor: "#F4D03F",
     phase: "Phase 1: Style & Merchandising",
     description: "Manage line allocation and re-planning based on material availability.",
     tasks: [
