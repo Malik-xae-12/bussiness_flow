@@ -220,6 +220,7 @@ export const ProcessFlow = ({
                   onSelect={() => onSelectTask?.(task.id)}
                   teamId={team.id}
                   onNavigateToTeam={onNavigateToTeam}
+                  teamHexColor={team.hexColor}
                 />
               ))
             ) : (
