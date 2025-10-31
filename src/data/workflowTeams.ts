@@ -391,6 +391,7 @@ export const workflowTeams: WorkflowTeam[] = [
     name: "Fabric Allocation",
     icon: Layout,
     color: "from-indigo/20 to-indigo/5",
+    hexColor: "#6C63FF",
     phase: "Phase 4: Production & Allocation",
     description: "Allocate fabric across deliveries",
     tasks: [
