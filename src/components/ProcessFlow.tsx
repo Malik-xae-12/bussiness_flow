@@ -78,10 +78,10 @@ const ProcessTaskCard = ({
       >
         <div className="flex items-start gap-3">
           <div
-            className={cn(
-              "rounded-lg bg-background p-2 shadow-sm",
-              iconColors[task.status]
-            )}
+            className="rounded-lg bg-background p-2 shadow-sm"
+            style={{
+              color: getIconColor(),
+            }}
           >
             <Icon className="h-5 w-5" />
           </div>
