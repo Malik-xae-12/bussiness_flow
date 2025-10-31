@@ -59,8 +59,16 @@ const ProcessTaskCard = ({
           "w-full max-w-sm p-4 rounded-xl border-2 transition-all duration-300 text-left group",
           statusColors[task.status],
           isSelected &&
-            "ring-2 ring-primary ring-offset-2 shadow-lg scale-105"
+            "shadow-lg scale-105"
         )}
+        style={
+          isSelected ? {
+            borderColor: hexColor,
+            boxShadow: `0 0 0 2px white, 0 0 0 4px ${hexColor}`,
+          } : {
+            borderColor: task.status === "normal" ? `${hexColor}40` : undefined,
+          }
+        }
       >
         <div className="flex items-start gap-3">
           <div
