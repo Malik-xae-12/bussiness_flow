@@ -150,16 +150,20 @@ export const ProcessFlow = ({
     <div ref={scrollContainerRef} className="flex-1 overflow-y-auto flex flex-col">
       {/* Team Header */}
       <div
-        className={cn(
-          "bg-gradient-to-r " +
-            team.color +
-            " border-b border-border sticky top-0 z-10"
-        )}
+        className="border-b border-border sticky top-0 z-10"
+        style={{
+          background: `linear-gradient(to right, ${team.hexColor || "#6B7280"}15, ${team.hexColor || "#6B7280"}08)`,
+        }}
       >
         <div className="p-6">
           <div className="flex items-start gap-4">
-            <div className="rounded-lg bg-background/80 p-3 shadow-sm">
-              <team.icon className="h-6 w-6 text-primary" />
+            <div
+              className="rounded-lg p-3 shadow-sm text-white"
+              style={{
+                backgroundColor: team.hexColor || "#6B7280",
+              }}
+            >
+              <team.icon className="h-6 w-6" />
             </div>
             <div className="flex-1">
               <h2 className="text-2xl font-bold text-foreground mb-1">
@@ -168,7 +172,12 @@ export const ProcessFlow = ({
               <p className="text-sm text-muted-foreground mb-2">
                 {team.description}
               </p>
-              <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">
+              <span
+                className="inline-block px-3 py-1 rounded-full text-xs font-semibold text-white"
+                style={{
+                  backgroundColor: (team.hexColor || "#6B7280") + "80",
+                }}
+              >
                 {team.phase}
               </span>
             </div>
