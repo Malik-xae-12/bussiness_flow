@@ -315,7 +315,8 @@ export const workflowTeams: WorkflowTeam[] = [
     id: "logistics",
     name: "Logistics / Import Team - Ambattur",
     icon: Truck,
-    color: "from-green/20 to-green/5",
+    color: "from-teal/20 to-teal/5",
+    hexColor: "#48B0B0",
     phase: "Phase 3: Logistics & Shipping",
     description: "Booking and shipment tracking",
     tasks: [
