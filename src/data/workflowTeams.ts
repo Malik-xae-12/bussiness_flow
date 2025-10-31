@@ -415,7 +415,8 @@ export const workflowTeams: WorkflowTeam[] = [
     id: "production",
     name: "Production",
     icon: Factory,
-    color: "from-rose/20 to-rose/5",
+    color: "from-cyan/20 to-cyan/5",
+    hexColor: "#52C4B1",
     phase: "Phase 4: Production & Allocation",
     description: "Cutting, stitching and dispatch",
     tasks: [
